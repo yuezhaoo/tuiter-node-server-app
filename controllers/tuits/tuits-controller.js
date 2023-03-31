@@ -13,11 +13,38 @@ const findTuits = (req, res) =>
     res.json(tuits);
 
 
+const currentUser = {
+    "userName": "NASA",
+    "handle": "@nasa",
+    "image": "nasa.png",
+    "title": "New tweet by Nasa"
+};
+
+const templateTuit = {
+    ...currentUser,
+    "topic": "Space",
+    "time": "2h",
+    "liked": false,
+    "replies": 0,
+    "retuits": 0,
+    "likes": 0,
+    "dislikes": 0
+}
+
+// const createTuit = (req, res) => {
+//     const newTuit = req.body;
+//     newTuit._id = (new Date()).getTime()+'';
+//     newTuit.likes = 0;
+//     newTuit.liked = false;
+//     tuits.push(newTuit);
+//     res.json(newTuit);
+// }
 const createTuit = (req, res) => {
-    const newTuit = req.body;
+    const newTuit = {
+        ...req.body,
+        ...templateTuit
+    };
     newTuit._id = (new Date()).getTime()+'';
-    newTuit.likes = 0;
-    newTuit.liked = false;
     tuits.push(newTuit);
     res.json(newTuit);
 }
